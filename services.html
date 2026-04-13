@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore DB SALES services — Android App Development, Website Development, UI/UX Design, App Maintenance & Publishing Assistance.">
+  <title>Our Services — DB SALES</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ===== Service Detail Cards ===== */
+    .service-detail-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-detail-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: transparent;
+    }
+
+    .sdc-header {
+      padding: 36px 32px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sdc-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient);
+      opacity: 0.03;
+      transition: var(--transition);
+    }
+
+    .service-detail-card:hover .sdc-header::before {
+      opacity: 0.08;
+    }
+
+    .sdc-icon-wrap {
+      width: 68px;
+      height: 68px;
+      background: var(--primary-50);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      transition: var(--transition);
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-detail-card:hover .sdc-icon-wrap {
+      background: var(--gradient);
+      color: var(--white);
+      transform: scale(1.08) rotate(-3deg);
+      box-shadow: 0 8px 25px rgba(79, 70, 229, 0.35);
+    }
+
+    .sdc-header h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .sdc-header p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+      margin: 0;
+    }
+
+    .sdc-body {
+      padding: 0 32px 32px;
+      margin-top: auto;
+    }
+
+    .sdc-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sdc-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-top: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .sdc-features li:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sdc-features li .feat-check {
+      width: 22px;
+      height: 22px;
+      background: #ECFDF5;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #22C55E;
+      font-size: 0.6rem;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .service-detail-card:hover .sdc-features li .feat-check {
+      background: var(--primary-50);
+      color: var(--primary);
+    }
+
+    .sdc-footer {
+      padding: 20px 32px;
+      background: var(--light-bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .sdc-footer a {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .sdc-footer a i {
+      transition: var(--transition);
+    }
+
+    .sdc-footer a:hover {
+      gap: 12px;
+      color: var(--primary-dark);
+    }
+
+    .sdc-footer a:hover i {
+      transform: translateX(4px);
+    }
+
+    /* ===== Service Spotlight ===== */
+    .spotlight-section {
+      background: var(--dark-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spotlight-section::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 500px;
+      height: 500px;
+      background: rgba(79, 70, 229, 0.08);
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .spotlight-section::after {
+      content: '';
+      position: absolute;
+      bottom: -200px;
+      left: -200px;
+      width: 400px;
+      height: 400px;
+      background: rgba(124, 58, 237, 0.06);
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .spotlight-grid-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+
+    .spotlight-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .spotlight-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .spotlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 20px 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+
+    .spotlight-item:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(79, 70, 229, 0.3);
+      transform: translateX(6px);
+    }
+
+    .spotlight-item .sp-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(79, 70, 229, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-light);
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .spotlight-item:hover .sp-icon {
+      background: var(--gradient);
+      color: var(--white);
+    }
+
+    .spotlight-item h5 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .spotlight-item p {
+      font-size: 0.84rem;
+      color: var(--text-light);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .spotlight-image {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .spotlight-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .spotlight-image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(79,70,229,0.3), rgba(124,58,237,0.15));
+      pointer-events: none;
+    }
+
+    /* ===== Tech Stack Section ===== */
+    .tech-card {
+      text-align: center;
+      padding: 28px 16px;
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+      height: 100%;
+    }
+
+    .tech-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+
+    .tech-card .tech-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .tech-card:hover .tech-icon {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .tech-card h6 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .tech-card p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* ===== Service Process Mini ===== */
+    .service-process-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 24px 0;
+      position: relative;
+    }
+
+    .service-process-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 60px;
+      left: 23px;
+      width: 2px;
+      height: calc(100% - 48px);
+      background: var(--border);
+    }
+
+    .service-process-step:not(:last-child):hover::after {
+      background: var(--primary-light);
+      transition: var(--transition);
+    }
+
+    .sp-step-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--primary-50);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: var(--transition);
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-process-step:hover .sp-step-icon {
+      background: var(--gradient);
+      color: var(--white);
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.35);
+    }
+
+    .sp-step-content h5 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .sp-step-content p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* ===== Responsive Overrides ===== */
+    @media (max-width: 991px) {
+      .spotlight-image img {
+        min-height: 300px;
+      }
+      .sdc-header {
+        padding: 28px 24px 18px;
+      }
+      .sdc-body {
+        padding: 0 24px 24px;
+      }
+      .sdc-footer {
+        padding: 18px 24px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .sdc-header {
+        padding: 24px 20px 16px;
+      }
+      .sdc-body {
+        padding: 0 20px 20px;
+      }
+      .sdc-footer {
+        padding: 16px 20px;
+      }
+      .sdc-header h3 {
+        font-size: 1.15rem;
+      }
+      .sdc-features li {
+        font-size: 0.84rem;
+        padding: 8px 0;
+      }
+      .service-process-step:not(:last-child)::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-spinner"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <span class="brand-icon">DB</span>
+        SALES
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#process">Process</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link nav-cta-btn" href="contact.html">Get a Quote</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="hero-grid-pattern"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="page-hero-content">
+      <span class="section-badge" data-aos="fade-up"><i class="fas fa-cogs"></i> What We Offer</span>
+      <h1 data-aos="fade-up" data-aos-delay="100">Our Services</h1>
+      <p data-aos="fade-up" data-aos-delay="200">End-to-end digital solutions crafted with precision, performance, and purpose — from idea to launch.</p>
+    </div>
+  </section>
+
+  <!-- Service Detail Cards -->
+  <section style="padding: 100px 0;">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-badge"><i class="fas fa-star"></i> Core Expertise</span>
+        <h2 class="section-title">Solutions We Deliver</h2>
+        <p class="section-subtitle centered">Every service is designed to solve real business challenges with modern technology and thoughtful execution.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Android App Development -->
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="0">
+          <div class="service-detail-card">
+            <div class="sdc-header">
+              <div class="sdc-icon-wrap"><i class="fab fa-android"></i></div>
+              <h3>Android App Development</h3>
+              <p>We build secure, scalable, and high-performance Android applications tailored to your business needs — from startups to enterprise-grade solutions.</p>
+            </div>
+            <div class="sdc-body">
+              <ul class="sdc-features">
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Native & Cross-Platform Development</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Clean Architecture & MVVM Pattern</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Material Design & Custom UI</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> API Integration & Offline Support</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Performance Optimization</li>
+              </ul>
+            </div>
+            <div class="sdc-footer">
+              <a href="contact.html">Discuss Your App Idea <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Website Development -->
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-detail-card">
+            <div class="sdc-header">
+              <div class="sdc-icon-wrap"><i class="fas fa-globe"></i></div>
+              <h3>Website Development</h3>
+              <p>Modern, responsive websites that represent your brand, engage visitors, and convert them into loyal customers with pixel-perfect design.</p>
+            </div>
+            <div class="sdc-body">
+              <ul class="sdc-features">
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Responsive & Mobile-First Design</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Fast Loading & SEO Optimized</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> CMS & Dynamic Functionality</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> E-Commerce Ready Solutions</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Secure Hosting & Deployment</li>
+              </ul>
+            </div>
+            <div class="sdc-footer">
+              <a href="contact.html">Start Your Website <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- UI/UX Design -->
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-detail-card">
+            <div class="sdc-header">
+              <div class="sdc-icon-wrap"><i class="fas fa-palette"></i></div>
+              <h3>UI/UX Design</h3>
+              <p>Beautiful, intuitive interfaces designed with user psychology and modern design principles — every pixel serves a purpose.</p>
+            </div>
+            <div class="sdc-body">
+              <ul class="sdc-features">
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> User Research & Personas</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Wireframing & Prototyping</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Visual Design & Brand Alignment</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Interaction Design & Micro-Animations</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Usability Testing & Iteration</li>
+              </ul>
+            </div>
+            <div class="sdc-footer">
+              <a href="contact.html">Get a Design Audit <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Maintenance & Support -->
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-detail-card">
+            <div class="sdc-header">
+              <div class="sdc-icon-wrap"><i class="fas fa-tools"></i></div>
+              <h3>App Maintenance & Support</h3>
+              <p>Ongoing support, bug fixes, feature updates, and performance optimization to keep your applications running flawlessly 24/7.</p>
+            </div>
+            <div class="sdc-body">
+              <ul class="sdc-features">
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Bug Fixing & Issue Resolution</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Feature Enhancements & Updates</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Performance Monitoring</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> OS Compatibility Updates</li>
+                <li><span class="feat-check"><i class="fas fa-check"></i></span> Dedicated Support Channels</li>
+              </ul>
+            </div>
+            <div class="sdc-footer">
+              <a href="contact.html">Get Support Plan <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App Publishing — Full Width Card -->
+      <div class="row justify-content-center mt-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="col-lg-8">
+          <div class="service-detail-card">
+            <div class="sdc-header" style="text-align: center;">
+              <div class="sdc-icon-wrap" style="margin: 0 auto 20px;"><i class="fas fa-cloud-upload-alt"></i></div>
+              <h3>App Publishing & Play Store Assistance</h3>
+              <p>Complete Google Play Store submission support — from asset preparation, screenshots, and descriptions to review handling and successful launch management.</p>
+            </div>
+            <div class="sdc-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <ul class="sdc-features">
+                    <li><span class="feat-check"><i class="fas fa-check"></i></span> Store Asset Creation</li>
+                    <li><span class="feat-check"><i class="fas fa-check"></i></span> App Description & Keywords</li>
+                    <li><span class="feat-check"><i class="fas fa-check"></i></span> Policy Compliance Check</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="sdc-features">
+                    <li><span class="feat-check"><i class="fas fa-check"></i></span> Submission & Review Handling</li>
+                    <li><span class="feat-check"><i class="fas fa-check"></i></span> Launch Strategy & ASO</li>
+                    <li><span class="feat-check"><i class="fas fa-check"></i></span> Post-Launch Monitoring</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="sdc-footer" style="text-align: center;">
+              <a href="contact.html">Get Publishing Help <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Spotlight -->
+  <section class="spotlight-section" style="padding: 100px 0;">
+    <div class="spotlight-grid-pattern"></div>
+    <div class="container">
+      <div class="spotlight-content">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6" data-aos="fade-right">
+            <span class="section-badge"><i class="fas fa-gem"></i> Our Approach</span>
+            <h2 class="section-title" style="color: var(--white);">Why Businesses<br>Choose Us</h2>
+            <p style="color: var(--text-light); font-size: 1rem; margin-bottom: 32px; max-width: 480px; line-height: 1.8;">We don't just build products — we build digital assets that become competitive advantages for your business.</p>
+
+            <div class="spotlight-list">
+              <div class="spotlight-item">
+                <div class="sp-icon"><i class="fas fa-bullseye"></i></div>
+                <div>
+                  <h5>Business-First Thinking</h5>
+                  <p>Every technical decision is aligned with your business goals and ROI expectations.</p>
+                </div>
+              </div>
+              <div class="spotlight-item">
+                <div class="sp-icon"><i class="fas fa-layer-group"></i></div>
+                <div>
+                  <h5>Clean Architecture</h5>
+                  <p>Maintainable, testable code that scales as your user base grows.</p>
+                </div>
+              </div>
+              <div class="spotlight-item">
+                <div class="sp-icon"><i class="fas fa-shield-alt"></i></div>
+                <div>
+                  <h5>Security Built-In</h5>
+                  <p>Industry-standard security practices implemented from day one, not as an afterthought.</p>
+                </div>
+              </div>
+              <div class="spotlight-item">
+                <div class="sp-icon"><i class="fas fa-sync-alt"></i></div>
+                <div>
+                  <h5>Agile & Transparent</h5>
+                  <p>Regular updates, iterative delivery, and complete visibility into your project progress.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="spotlight-image">
+              <img src="https://static.vecteezy.com/system/resources/thumbnails/072/504/259/small/why-choose-us-business-man-holding-sign-for-advertisement-and-marketing-photo.jpg" alt="DB SALES Team Working">
+              <div class="spotlight-image-overlay"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Stack -->
+  <section class="section-light" style="padding: 100px 0;">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-badge"><i class="fas fa-microchip"></i> Tech Stack</span>
+        <h2 class="section-title">Technologies We Use</h2>
+        <p class="section-subtitle centered">We leverage the latest and most reliable technologies to build robust digital products.</p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+          <div class="tech-card">
+            <div class="tech-icon" style="background: #E8F5E9; color: #3DDC84;">
+              <i class="fab fa-android"></i>
+            </div>
+            <h6>Android</h6>
+            <p>Kotlin & Java</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="50">
+          <div class="tech-card">
+            <div class="tech-icon" style="background: #FFF3E0; color: #FF7043;">
+              <i class="fas fa-fire"></i>
+            </div>
+            <h6>Firebase</h6>
+            <p>Backend Services</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="tech-card">
+            <div class="tech-icon" style="background: #E3F2FD; color: #42A5F5;">
+              <i class="fab fa-html5"></i>
+            </div>
+            <h6>HTML5</h6>
+            <p>Structure</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+          <div class="tech-card">
+            <div class="tech-icon" style="background: #E8EAF6; color: #5C6BC0;">
+              <i class="fab fa-css3-alt"></i>
+            </div>
+            <h6>CSS3</h6>
+            <p>Styling</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="tech-card">
+            <div class="tech-icon" style="background: #FFF8E1; color: #FDD835;">
+              <i class="fab fa-js-square"></i>
+            </div>
+            <h6>JavaScript</h6>
+            <p>Interactivity</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="250">
+          <div class="tech-card">
+            <div class="tech-icon" style="background: #F3E5F5; color: #AB47BC;">
+              <i class="fab fa-bootstrap"></i>
+            </div>
+            <h6>Bootstrap</h6>
+            <p>Framework</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="tech-card">
+            <div class="tech-icon" style="background: #E0F7FA; color: #26C6DA;">
+              <i class="fas fa-database"></i>
+            </div>
+            <h6>MySQL</h6>
+            <p>Database</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="350">
+          <div class="tech-card">
+            <div class="tech-icon" style="background: #FCE4EC; color: #EC407A;">
+              <i class="fab fa-figma"></i>
+            </div>
+            <h6>Figma</h6>
+            <p>UI/UX Design</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Delivery Process -->
+  <section style="padding: 100px 0;">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5" data-aos="fade-right">
+          <span class="section-badge"><i class="fas fa-route"></i> Delivery Process</span>
+          <h2 class="section-title">How We Deliver<br>Each Service</h2>
+          <p class="section-subtitle">A structured, transparent process that ensures quality at every stage — from first conversation to final handover.</p>
+          <a href="contact.html" class="btn-primary-custom mt-3">
+            Start a Project
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="col-lg-7" data-aos="fade-left">
+          <div class="service-process-step">
+            <div class="sp-step-icon"><i class="fas fa-comments"></i></div>
+            <div class="sp-step-content">
+              <h5>Discovery & Consultation</h5>
+              <p>We begin with a deep-dive conversation to understand your goals, target audience, technical requirements, and project scope.</p>
+            </div>
+          </div>
+          <div class="service-process-step">
+            <div class="sp-step-icon"><i class="fas fa-drafting-compass"></i></div>
+            <div class="sp-step-content">
+              <h5>Planning & Architecture</h5>
+              <p>We define the project roadmap, tech stack, wireframes, and system architecture before writing a single line of code.</p>
+            </div>
+          </div>
+          <div class="service-process-step">
+            <div class="sp-step-icon"><i class="fas fa-code"></i></div>
+            <div class="sp-step-content">
+              <h5>Development & Testing</h5>
+              <p>Agile sprints with regular builds, code reviews, and QA testing ensure your product is solid at every iteration.</p>
+            </div>
+          </div>
+          <div class="service-process-step">
+            <div class="sp-step-icon"><i class="fas fa-handshake"></i></div>
+            <div class="sp-step-content">
+              <h5>Delivery & Handover</h5>
+              <p>Final testing, deployment, documentation, and knowledge transfer — with ongoing support available whenever you need it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content" data-aos="zoom-in">
+        <h2>Have a Project in Mind?</h2>
+        <p>Let's discuss your requirements and find the perfect solution for your business. No obligation, no pressure.</p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="contact.html" class="btn-white-custom">
+            Get a Free Quote
+            <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="https://wa.me/919537193765?text=Hi%20DB%20SALES%2C%20I%20want%20to%20discuss%20a%20project." target="_blank" class="btn-outline-custom" style="border-color: rgba(255,255,255,0.5);">
+            <i class="fab fa-whatsapp"></i>
+            WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">
+            <span class="brand-icon">DB</span>
+            SALES
+          </div>
+          <p class="footer-desc">A modern technology solutions provider focused on delivering high-quality mobile applications and digital products for businesses of all sizes.</p>
+          <div class="footer-social">
+            <a href="https://wa.me/919537193765" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://in.linkedin.com/in/db-sales-263260402" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-heading">Services</h5>
+          <ul class="footer-links">
+            <li><a href="services.html#"><i class="fas fa-chevron-right"></i> Android Apps</a></li>
+            <li><a href="services.html#"><i class="fas fa-chevron-right"></i> Websites</a></li>
+            <li><a href="services.html#"><i class="fas fa-chevron-right"></i> UI/UX Design</a></li>
+            <li><a href="services.html#"><i class="fas fa-chevron-right"></i> Maintenance</a></li>
+            <li><a href="services.html#"><i class="fas fa-chevron-right"></i> App Publishing</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-heading">Company</h5>
+          <ul class="footer-links">
+            <li><a href="index.html#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+            <li><a href="privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h5 class="footer-heading">Contact Info</h5>
+          <div class="footer-contact-item">
+            <div class="fc-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <p>2nd Floor, Flat No - 204, Shaktidhara Apartment, Kuber Nagar Society, Karanj, Surat, Gujarat - 395180</p>
+          </div>
+          <div class="footer-contact-item">
+            <div class="fc-icon"><i class="fas fa-envelope"></i></div>
+            <p><a href="mailto:dbsales326@gmail.com">dbsales326@gmail.com</a></p>
+          </div>
+          <div class="footer-contact-item">
+            <div class="fc-icon"><i class="fas fa-phone-alt"></i></div>
+            <p><a href="tel:+919537193765">+91 95371 93765</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p>&copy; 2025 DB SALES. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p><a href="privacy.html">Privacy Policy</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/919537193765" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Preloader
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('preloader').classList.add('loaded'), 500);
+    });
+
+    // AOS
+    AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 80 });
+
+    // Navbar scroll
+    const navbar = document.getElementById('mainNavbar');
+    const backToTop = document.getElementById('backToTop');
+    const whatsappFloat = document.querySelector('.whatsapp-float');
+
+    function handleScroll() {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+      backToTop.classList.toggle('show', window.scrollY > 400);
+      whatsappFloat.classList.toggle('show', window.scrollY > 400);
+    }
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Close mobile menu on link click
+    document.querySelectorAll('#navbarNav .nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const bsCollapse = bootstrap.Collapse.getInstance(document.getElementById('navbarNav'));
+        if (bsCollapse) bsCollapse.hide();
+      });
+    });
+  </script>
+</body>
+</html>
